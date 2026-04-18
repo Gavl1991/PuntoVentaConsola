@@ -1,55 +1,51 @@
 import java.util.*;
 
-public class producto {
-    static int contador=0, piezas=0;
+public class Producto {
+    static int contador=0;
+    //public static String agregar;
     static List<String> listaProductos = new ArrayList<>();
-    static List<String> listaPrecios = new ArrayList<>();
-    static List<String> listaStock = new ArrayList<>();
-    static List<Integer> listaCompra = new ArrayList<>();
+    static List<Double> listaPrecios = new ArrayList<>();
+    static List<Integer> listaStock = new ArrayList<>();
     private static String Producto;
-    private static double Precio;
-    private static int Stock;
-    private static int Compra;
-    private static int Estado;
+    public static double Precio;
+    static int Estado;
     // Constructor de la clase Persona
-    public  producto() {
+    public Producto() {
         // Inicializa los atributos usando los métodos get
-        this.Producto = getProducto();
-        this.Precio = getPrecio();
-        this.Stock = getStock();
-        this.Estado = getEstado();
-        this.Compra = getCompra();
+        Producto = getProducto();
+        //Precio = getPrecio();
+        //Stock = getStock();
+        //Estado = getEstado();
     }
 
     public static void agregarProducto() {
         do{
             Scanner add = new Scanner(System.in);
             System.out.println("\n\t\tRegistro #" + (contador + 1));
-            System.out.print("Ingrese el producto a ser agregado: ");
+            System.out.print("Ingrese el Producto a ser agregado: ");
             Producto = add.nextLine();
             listaProductos.add(Producto.toUpperCase());
-            System.out.print("Ingrese el precio de este producto: ");
+            System.out.print("Ingrese el precio de este Producto: ");
             Precio = add.nextDouble();
-            listaPrecios.add(String.valueOf(Precio));
-            System.out.print("Ingrese el stock de este producto: ");
-            Stock = add.nextInt();
-            listaStock.add(String.valueOf(Stock));
+            listaPrecios.add(Precio);
+            System.out.print("Ingrese el stock de este Producto: ");
+            int stock = add.nextInt();
+            listaStock.add(stock);
             try {
                 do {
                     System.out.println("\n¿Desea ingresar otro nuevo registro? \n1. Si   \n2. No"); // Pregunta si se desea agregar otro registro
                     Estado = add.nextInt();
                     if (Estado != 1 && Estado != 2)
-                        System.out.println("\t¡Opcion invalida!");
+                        System.out.println("\t¡Opción invalida!");
                 }
                 while (Estado != 1 && Estado != 2);
             }catch (InputMismatchException e){
-                System.out.println("\t¡Caracter invalido!");
+                System.out.println("\t¡Carácter invalido!");
                 add.nextLine();
                 agregarProducto();
             }
             contador++; // Incrementa el contador
         }while (Estado == 1);{
-            return;
         }
     }
 
@@ -61,7 +57,7 @@ public class producto {
                 return;
             }else {
                 Scanner bR = new Scanner(System.in);
-                System.out.println("\nIngrese el nombre del producto: ");    // Solicita el nombre a buscar
+                System.out.println("\nIngrese el nombre del Producto: ");    // Solicita el nombre a buscar
                 Producto = bR.nextLine();
                 if (listaProductos.contains(Producto.toUpperCase())) {  // Verifica si el nombre existe en la lista
                     int posicion = listaProductos.indexOf(Producto.toUpperCase());  // Obtiene la posición del registro
@@ -72,37 +68,14 @@ public class producto {
                         System.out.println("Precio: " + listaPrecios.get(posicion));
                         System.out.println("Stock: " + listaStock.get(posicion));
                     }
-                    try {
-                        do {
-                            System.out.println("\n¿Desea buscar otro registro? \n1. Si   \n2. No"); // Pregunta si desea buscar otro registro
-                            Estado = bR.nextInt();
-                            if (Estado != 1 && Estado != 2)
-                                System.out.println("\t¡Opcion invalida!");
-                        }
-                        while (Estado != 1 && Estado != 2);
-                    }catch (InputMismatchException e){
-                        System.out.println("\t¡Caracter invalido!");
-                        bR.nextLine();
-                    }
+                    tryCatch();
                 } else {
                     System.out.println("\t\tEl registro no existe!");    // Si no se encuentra el registro
-                    try {
-                        do {
-                            System.out.println("\n¿Desea buscar otro registro? \n1. Si   \n2. No");
-                            Estado = bR.nextInt();
-                            if (Estado != 1 && Estado != 2)
-                                System.out.println("\t¡Opcion invalida!");
-                        }
-                        while (Estado != 1 && Estado != 2);
-                    }catch (InputMismatchException e){
-                        System.out.println("\t¡Caracter invalido!");
-                        bR.nextLine();  //Limpia el buffer ante el error capturado
-                    }
+                    tryCatch();
                 }
             }
         }
         while (Estado == 1);{
-            return;
         }
     }
 
@@ -126,12 +99,12 @@ public class producto {
                 aR.nextLine();
                 // Actualiza los datos usando set()
                 if (indice >= 0 && indice < listaProductos.size()) {
-                    System.out.println("Nuevo producto: ");
+                    System.out.println("Nuevo Producto: ");
                     listaProductos.set(indice, aR.nextLine().toUpperCase());
                     System.out.println("Nuevo precio: ");
-                    listaPrecios.set(indice, aR.nextLine().toUpperCase());
+                    listaPrecios.set(indice, Double.valueOf(aR.nextLine()));
                     System.out.println("Stock: ");
-                    listaStock.set(indice, aR.nextLine().toUpperCase());
+                    listaStock.set(indice, Integer.valueOf(aR.nextLine()));
                     System.out.println("Datos actualizados correctamente!");
                     System.out.println("\n¿Desea actualizar otro registro? \n1. Si   \n2. No");
                     Estado = aR.nextInt();
@@ -144,11 +117,11 @@ public class producto {
                             System.out.println("\n¿Desea modificar otro registro? \n1. Si   \n2. No");
                             Estado = aR.nextInt();
                             if (Estado != 1 && Estado != 2)
-                                System.out.println("\t¡Opcion invalida!");
+                                System.out.println("\t¡Opción invalida!");
                         } while (Estado != 1 && Estado != 2);
                     }
                     catch (InputMismatchException e){
-                        System.out.println("\t¡Caracter invalido!");
+                        System.out.println("\t¡Carácter invalido!");
                         aR.nextLine();
                         actualizarRegistro();
                     }
@@ -156,7 +129,6 @@ public class producto {
             }
         }
         while (Estado == 1);{
-            return;
         }
     }
 
@@ -178,7 +150,7 @@ public class producto {
                     Scanner dell = new Scanner(System.in);
                     int delete = dell.nextInt();    // El usuario selecciona el registro
                     if (delete > contador) {
-                        System.out.println("\t¡Opcion invalida!");
+                        System.out.println("\t¡Opción invalida!");
                         eliminarRegistro();
                     } else {
                         if (delete == 0) { // Si elige 0 regresa al menú
@@ -197,10 +169,10 @@ public class producto {
                                 System.out.println("\n¿Desea eliminar otro registro? \n1. Si   \n2. No");
                                 Estado = eR.nextInt();
                                 if (Estado != 1 && Estado != 2)
-                                    System.out.println("\t¡Opcion invalida!");
+                                    System.out.println("\t¡Opción invalida!");
                             } while (Estado != 1 && Estado != 2);
                         } catch (InputMismatchException e) {
-                            System.out.println("\t¡Caracter invalido!");
+                            System.out.println("\t¡Carácter invalido!");
                             dell.nextLine();
                             eliminarRegistro();
                         }
@@ -211,7 +183,6 @@ public class producto {
             }
         }
         while (Estado == 1);{
-            return;
         }
     }
 
@@ -228,41 +199,20 @@ public class producto {
             }
         }
     }
-
-    // Método para comprar productos
-    public static void mostrarProductos(){
-        do {
-            Scanner cP = new Scanner(System.in);
-            if (contador == 0) {
-                System.out.println("No hay productos!");
-                return;
-            } else {
-                System.out.println("\n\t\tProductos");
-                for (int i = 0; i < contador; i++) {
-                    System.out.println("#" + (i + 1) + "\t" + listaProductos.get(i) + "\t\t$ " + listaPrecios.get(i) + " pesos");
-                }
-                System.out.println("Selecciona el producto a comprar");
-                Compra = cP.nextInt();
-                listaCompra.add(Compra-1);
-                System.out.println("Cuantas piezas desea comprar");
-                piezas = cP.nextInt();
-                listaStock = listaStock(Compra-1)-piezas;
-                //listaProductos.remove(Compra -1);
-                System.out.println("Producto agregado al carrito");
-                try {
-                    do {
-                        System.out.println("\n¿Desea agregar otro producto al carrito? \n1. Si   \n2. No");
-                        Estado = cP.nextInt();
-                        if (Estado != 1 && Estado != 2)
-                            System.out.println("\t¡Opcion invalida!");
-                    } while (Estado != 1 && Estado != 2);
-                } catch (InputMismatchException e) {
-                    System.out.println("\t¡Carácter invalido!");
-                    cP.nextLine();
-                }
+    // Método para atrapar errores
+    public static void tryCatch() {
+        Scanner bR = new Scanner(System.in);
+        try {
+            do {
+                System.out.println("\n¿Desea buscar otro registro? \n1. Si   \n2. No");
+                Estado = bR.nextInt();
+                if (Estado != 1 && Estado != 2)
+                    System.out.println("\t¡Opción invalida!");
             }
-        }while (Estado == 1);{
-            return;
+            while (Estado != 1 && Estado != 2);
+        }catch (InputMismatchException e){
+            System.out.println("\t¡Carácter invalido!");
+            bR.nextLine();  //Limpia el buffer ante el error capturado
         }
     }
 
@@ -270,37 +220,30 @@ public class producto {
         return Producto;
     }
 
-    public static void setProducto(String producto) {
-        Producto = producto;
-    }
+    /*public static void setProducto(String Producto) {
+        Producto = Producto;
+    }*/
 
-    public static double getPrecio() {
+    /*public static double getPrecio() {
         return Precio;
-    }
+    }*/
 
-    public static void setPrecio(double precio) {
+    /*public static void setPrecio(double precio) {
         Precio = precio;
-    }
+    }*/
 
-    public static int getStock() {
+    /*public static int getStock() {
         return Stock;
-    }
+    }*/
 
-    public static void setStock(int stock) {
+    /*public static void setStock(int stock) {
         Stock = stock;
-    }
-    public static int getEstado() {
+    }*/
+    /*public static int getEstado() {
         return Estado;
-    }
+    }*/
 
-    public static void setEstado(int estado) {
+    /*public static void setEstado(int estado) {
         Estado = estado;
-    }
-
-    public static int getCompra(){
-        return Compra;
-    }
-    public static void setCompra(int compra) {
-        Compra = compra;
-    }
+    }*/
 }
