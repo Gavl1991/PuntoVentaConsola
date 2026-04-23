@@ -8,14 +8,14 @@ public class Producto {
     static List<Integer> listaStock = new ArrayList<>();
     private static String Producto;
     public static double Precio;
-    static int Estado;
+    static int Estado, Stock;
     // Constructor de la clase Persona
     public Producto() {
         // Inicializa los atributos usando los métodos get
         Producto = getProducto();
-        //Precio = getPrecio();
-        //Stock = getStock();
-        //Estado = getEstado();
+        Precio = getPrecio();
+        Stock = getStock();
+        Estado = getEstado();
     }
 
     public static void agregarProducto() {
@@ -217,33 +217,34 @@ public class Producto {
     }
 
     public static String getProducto() {
+
         return Producto;
     }
 
-    /*public static void setProducto(String Producto) {
+    public static void setProducto(String Producto) {
         Producto = Producto;
-    }*/
+    }
 
-    /*public static double getPrecio() {
+    public static double getPrecio() {
         return Precio;
-    }*/
+    }
 
-    /*public static void setPrecio(double precio) {
+    public static void setPrecio(double precio) {
         Precio = precio;
-    }*/
+    }
 
-    /*public static int getStock() {
+    public static int getStock() {
         return Stock;
-    }*/
+    }
 
-    /*public static void setStock(int stock) {
+    public static void setStock(int stock) {
         Stock = stock;
-    }*/
-    /*public static int getEstado() {
+    }
+    public static int getEstado() {
         return Estado;
-    }*/
+    }
 
-    /*public static void setEstado(int estado) {
+    public static void setEstado(int estado) {
         Estado = estado;
-    }*/
+    }
 }

@@ -30,7 +30,7 @@ void main() {
                     break;
                 case 6:
                     System.out.println("\n----Comprar Producto----");
-                    Factura.comprarProductos();
+                    Canasta.comprarProductos();
                     break;
                 case 7:
                     System.exit(0); //Salir del bucle y finalizar el programa
