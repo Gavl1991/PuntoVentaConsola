@@ -2,13 +2,13 @@ import java.util.*;
 
 public class Producto {
     static int contador=0;
-    //public static String agregar;
     static List<String> listaProductos = new ArrayList<>();
     static List<Double> listaPrecios = new ArrayList<>();
     static List<Integer> listaStock = new ArrayList<>();
     private static String Producto;
     public static double Precio;
     static int Estado, Stock;
+
     // Constructor de la clase Persona
     public Producto() {
         // Inicializa los atributos usando los métodos get
@@ -28,8 +28,8 @@ public class Producto {
             System.out.print("Ingrese el precio de este Producto: ");
             Precio = add.nextDouble();
             listaPrecios.add(Precio);
-            System.out.print("Ingrese el stock de este Producto: ");
-            int stock = add.nextInt();
+            Random random = new Random();
+            int stock = random.nextInt(100) + 1; // genera entre 1 y 100
             listaStock.add(stock);
             try {
                 do {
@@ -103,9 +103,9 @@ public class Producto {
                     listaProductos.set(indice, aR.nextLine().toUpperCase());
                     System.out.println("Nuevo precio: ");
                     listaPrecios.set(indice, Double.valueOf(aR.nextLine()));
-                    System.out.println("Stock: ");
-                    listaStock.set(indice, Integer.valueOf(aR.nextLine()));
-                    System.out.println("Datos actualizados correctamente!");
+                    //System.out.println("Stock: ");
+                    //listaStock.set(indice, Integer.valueOf(aR.nextLine()));
+                    System.out.println("\t¡Datos actualizados correctamente!\n");
                     System.out.println("\n¿Desea actualizar otro registro? \n1. Si   \n2. No");
                     Estado = aR.nextInt();
                 }

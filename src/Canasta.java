@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Canasta {
     static int piezas = 0, CantidadProductos = 0, indice, piezasTotales=0, piezasProducto=0;
-    static double costo = 0.0, total = 0.0, CantidadPrecios = 0.0;
+    static double costo=0.0, total = 0.0, CantidadPrecios = 0.0;
     static String agregar;
     static List<String> listaCompra = new ArrayList<>();
     static List<Integer> listaPiezas = new ArrayList<>();
@@ -36,7 +36,7 @@ public class Canasta {
                     continue;
                 }
                 agregar = Producto.listaProductos.get(Compra);   //Guarda el nombre del Producto en la variable agregar
-                System.out.println("Producto = " + agregar);    //Temporal
+                //System.out.println("Producto = " + agregar);    //Temporal
 
                 System.out.println("Cuantas piezas desea comprar");
                 piezas = cP.nextInt();
@@ -65,15 +65,6 @@ public class Canasta {
                 CantidadProductos += piezas;    //Suma el total de las piezas
                 Producto.listaStock.set(Compra, Producto.listaStock.get(Compra) - piezas);    //Resta el total del stock disponible según las piezas adquiridas por el usuario
                 System.out.println("Producto agregado al carrito");
-
-                //Inicia Facturación
-                costo = Producto.listaPrecios.get(Compra);   //Guarda el costo del Producto en la variable costo
-                CantidadPrecios = costo * piezas;   //Calcula el total del Producto seleccionado por el costo unitario del Producto
-                total = total + CantidadPrecios;    //Suma el total de la cuenta
-                //Termina Facturación
-
-                System.out.println("Total = "+total);
-                System.out.println("Total de productos = " + CantidadProductos);
                 Scanner bR = new Scanner(System.in);
                 try {
                     do {
@@ -90,8 +81,6 @@ public class Canasta {
             }
         }
         while (Producto.Estado == 1);
-        {
-        }
     }
 
     public static int getCompra() {
