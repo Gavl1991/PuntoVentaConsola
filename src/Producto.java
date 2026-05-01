@@ -24,7 +24,12 @@ public class Producto {
             System.out.println("\n\t\tRegistro #" + (contador + 1));
             System.out.print("Ingrese el Producto a ser agregado: ");
             Producto = add.nextLine();
-            listaProductos.add(Producto.toUpperCase());
+            if(listaProductos.contains(Producto.toUpperCase())){
+                System.out.println("El producto ya existe en el stock");
+                return;
+            }else {
+                listaProductos.add(Producto.toUpperCase());
+            }
             System.out.print("Ingrese el precio de este Producto: ");
             Precio = add.nextDouble();
             listaPrecios.add(Precio);
@@ -42,7 +47,7 @@ public class Producto {
             }catch (InputMismatchException e){
                 System.out.println("\t¡Carácter invalido!");
                 add.nextLine();
-                agregarProducto();
+                //agregarProducto();
             }
             contador++; // Incrementa el contador
         }while (Estado == 1);{

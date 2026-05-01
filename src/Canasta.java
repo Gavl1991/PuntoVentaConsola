@@ -7,6 +7,7 @@ public class Canasta {
     static int piezas = 0, CantidadProductos = 0, indice, piezasTotales=0, piezasProducto=0;
     static double costo=0.0, total = 0.0, CantidadPrecios = 0.0;
     static String agregar;
+    static boolean carrito=false;
     static List<String> listaCompra = new ArrayList<>();
     static List<Integer> listaPiezas = new ArrayList<>();
 
@@ -19,6 +20,12 @@ public class Canasta {
 
     // Método para comprar productos
     public static void comprarProductos() {
+        listaCompra.clear();
+        listaPiezas.clear();
+        total = 0;
+        CantidadProductos = 0;
+        piezasTotales = 0;
+        carrito = false;
         Scanner cP = new Scanner(System.in);
         do {
             if (Producto.contador == 0) {
@@ -73,7 +80,9 @@ public class Canasta {
                         if (Producto.Estado != 1 && Producto.Estado != 2)
                             System.out.println("\t¡Opción invalida!");
                     }
-                    while (Producto.Estado != 1 && Producto.Estado != 2);
+                    while (Producto.Estado != 1 && Producto.Estado != 2);{
+                        carrito = true;
+                    }
                 }catch (InputMismatchException e){
                     System.out.println("\t¡Carácter invalido!");
                     bR.nextLine();  //Limpia el buffer ante el error capturado

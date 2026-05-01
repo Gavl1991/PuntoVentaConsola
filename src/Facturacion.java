@@ -1,22 +1,42 @@
+import javax.swing.*;
 import java.util.Date;
 
 public class Facturacion extends Canasta {
     public static void Factura() {
-        costo = Producto.listaPrecios.get(Compra);   //Guarda el costo del Producto en la variable costo
-        CantidadPrecios = costo * piezas;   //Calcula el total del Producto seleccionado por el costo unitario del Producto
-        total = total + CantidadPrecios;    //Suma el total de la cuenta
-        Date fecha = new Date();
-        System.out.print("\n" + fecha + "\n");
-        System.out.print("\n\t\tArtículos\n");
-        System.out.print("Piezas\tProducto\tTotal\n");
-        for(int i=0; i<listaCompra.size();i++) {
-            System.out.print("  " + listaPiezas.get(i) + "\t" + listaCompra.get(i) +
-                    "\t\t" + (listaPiezas.get(i)*Producto.listaPrecios.get(i)) + "\n");
+        if (carrito && !listaCompra.isEmpty()) {
+
+            double total = 0; //reiniciar SIEMPRE
+            Date fecha = new Date();
+
+            System.out.println("\n" + fecha);
+            System.out.println("\n\t\tArtículos");
+            System.out.println("Piezas\tProducto\tTotal");
+
+            for (int i = 0; i < listaCompra.size(); i++) {
+                int piezas = listaPiezas.get(i);
+
+                int indexProducto = Producto.listaProductos.indexOf(listaCompra.get(i));
+                double precio = Producto.listaPrecios.get(indexProducto);
+
+                double totalProducto = piezas * precio;
+                total += totalProducto;
+
+                System.out.println("  " + piezas + "\t\t" + listaCompra.get(i) +
+                        "\t\t" + totalProducto);
+            }
+
+            double iva = total * 0.16;
+            double subtotal = total - iva;
+
+            System.out.printf("\n\tSubtotal = \t%.2f\n", subtotal);
+            System.out.printf("\tI.V.A    = \t%.2f\n", iva);
+            System.out.printf("\tTotal    = \t%.2f\n", total);
+
+            System.out.println("\n# Productos = " + CantidadProductos);
+            System.out.println("Usuario     = " + Usuario.userLog.getUserName());
+
+        } else {
+            System.out.println("El carrito está vacío.");
         }
-        System.out.print("\n\tSubtotal = \t" + (total-(total*.16)));
-        System.out.print("\n\tI.V.A    =  \t" + total*.16);
-        System.out.print("\n\tTotal    = \t" + total);
-        System.out.println("\n\n# Productos = " + CantidadProductos);
-        System.out.println("Usuario     = " + Usuario.userLog.getUserName());
     }
 }
