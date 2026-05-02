@@ -43,8 +43,6 @@ public class Canasta {
                     continue;
                 }
                 agregar = Producto.listaProductos.get(Compra);   //Guarda el nombre del Producto en la variable agregar
-                //System.out.println("Producto = " + agregar);    //Temporal
-
                 System.out.println("Cuantas piezas desea comprar");
                 piezas = cP.nextInt();
                 if (Producto.listaStock.get(Compra) < piezas) {

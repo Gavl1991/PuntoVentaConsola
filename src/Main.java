@@ -29,7 +29,7 @@ void main() {
                                     4. Actualizar registro
                                     5. Mostrar todos los registros
                                     6. Comprar productos
-                                    7. Reimpresión de factura
+                                    7. Impresión de factura
                                     8. Cerrar sesión
                                     9. Salir""");
                             System.out.println("-------------FIN--------------\n");
