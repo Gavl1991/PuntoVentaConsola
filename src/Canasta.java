@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Canasta {
     static int piezas = 0, CantidadProductos = 0, indice, piezasTotales=0, piezasProducto=0;
@@ -10,6 +7,8 @@ public class Canasta {
     static boolean carrito=false;
     static List<String> listaCompra = new ArrayList<>();
     static List<Integer> listaPiezas = new ArrayList<>();
+    static List<String> listaUsuariosCompra = new ArrayList<>();
+    static List<Date> listaFechasCompra = new ArrayList<>();
 
     public static int Compra;
     public Canasta() {
@@ -56,10 +55,10 @@ public class Canasta {
                     listaPiezas.set(indice, listaPiezas.get(indice) + piezas);
                 } else {
                     listaCompra.add(agregar);
-                    if (Producto.listaStock.get(Compra) < piezas) {
-                        System.out.println("No hay suficiente stock");
-                        continue;
-                    }
+                    //if (Producto.listaStock.get(Compra) < piezas) {
+                        //System.out.println("No hay suficiente stock");
+                        //continue;
+                    //}
 
                     // Agrega nuevas piezas
                     listaPiezas.add(piezas);
@@ -70,24 +69,30 @@ public class Canasta {
                 CantidadProductos += piezas;    //Suma el total de las piezas
                 Producto.listaStock.set(Compra, Producto.listaStock.get(Compra) - piezas);    //Resta el total del stock disponible según las piezas adquiridas por el usuario
                 System.out.println("Producto agregado al carrito");
-                Scanner bR = new Scanner(System.in);
+                //Scanner bR = new Scanner(System.in);
                 try {
                     do {
                         System.out.println("\n¿Desea agregar otro producto a la canasta? \n1. Si   \n2. No");
-                        Producto.Estado = bR.nextInt();
+                        Producto.Estado = cP.nextInt();
                         if (Producto.Estado != 1 && Producto.Estado != 2)
                             System.out.println("\t¡Opción invalida!");
                     }
-                    while (Producto.Estado != 1 && Producto.Estado != 2);{
+                    while (Producto.Estado != 1 && Producto.Estado != 2);
                         carrito = true;
-                    }
                 }catch (InputMismatchException e){
                     System.out.println("\t¡Carácter invalido!");
-                    bR.nextLine();  //Limpia el buffer ante el error capturado
+                    cP.nextLine();  //Limpia el buffer ante el error capturado
                 }
             }
         }
         while (Producto.Estado == 1);
+        if (!listaCompra.isEmpty()) {
+            carrito = true;
+            // Guardar usuario SOLO UNA VEZ por compra
+            listaUsuariosCompra.add(Usuario.userLog.getUserName());
+            // Guarda la fecha de la compra
+            listaFechasCompra.add(new Date());
+        }
     }
 
     public static int getCompra() {

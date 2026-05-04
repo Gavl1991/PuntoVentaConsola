@@ -19,7 +19,7 @@ void main() {
                 case 2:
                     System.out.println("\n----------Iniciar Sesion-----------");
                     Usuario.iniciarSesion();
-                    if (Usuario.correcto == true) {
+                    if (Usuario.correcto) {
                         boolean sesionActiva = true;
                         do {
                             System.out.println("\n-------------MENU-------------\nIngresa la opción deseada");
@@ -60,7 +60,6 @@ void main() {
                                     case 6:
                                         System.out.println("\n----Comprar Producto----");
                                         Canasta.comprarProductos();
-                                        //Facturacion.Factura();
                                         break;
                                     case 7:
                                         Facturacion.Factura();
